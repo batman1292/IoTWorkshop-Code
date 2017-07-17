@@ -1,0 +1,44 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"width": 1,
+			"row": {
+				"3": 1
+			},
+			"col": {
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "colorwheel",
+					"settings": {
+						"title": "WS2812 RGB LED",
+						"variableRGB": "datasources[\"dashboardX\"][\"/esp8266/X/led\"]"
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "DashboardX",
+			"type": "pahomqtt",
+			"settings": {
+				"server": "m12.cloudmqtt.com",
+				"port": 31419,
+				"use_ssl": true,
+				"client_id": "esp8266_X",
+				"username": "esp8266_X",
+				"password": "asdf1234",
+				"topics_to_subscribe": "/esp8266/X/+",
+				"topics_to_publish": "/esp8266/X/led,/esp8266/X/text",
+				"json_data": false
+			}
+		}
+	],
+	"columns": 3
+}
