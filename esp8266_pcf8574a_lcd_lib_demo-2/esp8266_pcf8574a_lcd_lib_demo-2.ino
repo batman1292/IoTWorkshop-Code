@@ -25,15 +25,16 @@ uint32_t ts;     // used to save timestamp value
 
 #include "PubSubClient.h"
 
-// Update these with values suitable for your network.
-const char* ssid = "ESL_Lab1";
-const char* password = "wifi@esl";
+#define wifi_ssid "ECC_IoTWorkshop"
+#define wifi_password "iotworkshop@ecc"
 
 // Config MQTT Server
-#define mqtt_server "m13.cloudmqtt.com"
-#define mqtt_port 13437
-#define mqtt_user "esp8266-1"
-#define mqtt_password "12345678"
+#define mqtt_server "m11.cloudmqtt.com"
+#define mqtt_port 19226
+#define mqtt_user "esp8266_17"
+#define mqtt_password "asdf1234"
+
+int esp_id = 17;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -66,6 +67,10 @@ inline void i2c_write_byte( uint8_t i2c_addr, uint8_t data ) {
 void setup() {
   Serial.begin( 115200 );
 
+  setup_wifi();
+  client.setServer(mqtt_server, mqtt_port);
+  client.setCallback(callback);
+  
   Wire.begin( I2C_SDA_PIN, I2C_SCL_PIN );
   delay(1000);
   i2c_scan();
@@ -78,12 +83,16 @@ void setup() {
   lcd.print( F("IoT Workshop") );
   delay(1000);
   ts = millis();
+}
 
+void setup_wifi() {
+  delay(10);
+  // We start by connecting to a WiFi network
   Serial.println();
   Serial.print("Connecting to ");
-  Serial.println(ssid);
+  Serial.println(wifi_ssid);
 
-  WiFi.begin(ssid, password);
+  WiFi.begin(wifi_ssid, wifi_password);
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
@@ -94,9 +103,6 @@ void setup() {
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
-  
-  client.setServer(mqtt_server, mqtt_port);
-  client.setCallback(callback);
 }
 
 String text = "IoT Workshop";
@@ -123,8 +129,10 @@ void connectCloudMQTT(){
     String clientId = "ESP8266Client-";
     clientId += String(random(0xffff), HEX);
     if (client.connect(clientId.c_str(), mqtt_user, mqtt_password)) {
+      char inTopic[64];
+      sprintf(inTopic, "/esp8266/%d/+", esp_id);
       Serial.println("connected");
-      client.subscribe("/esp8266/1/+");
+      client.subscribe(inTopic);
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
@@ -142,13 +150,9 @@ void callback(char* topic, byte* payload, unsigned int length) {
   token = strtok(topic, s);
   token = strtok(NULL, s);
   token = strtok(NULL, s);
-//  Serial.println(token);
-//  Serial.write(payload, length);
-//  Serial.println("");
   if(!strcmp(token, "text")){
     payload[length] = '\0';
-  text = String((char*)payload);
-//    text = String((char*)payload, length);
+    text = String((char*)payload);
     Serial.println(text);
   }
 }

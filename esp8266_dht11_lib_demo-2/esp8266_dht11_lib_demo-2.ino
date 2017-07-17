@@ -3,19 +3,20 @@
 #include "DHT.h"
 
 #define DHTPIN D4     // what pin we're connected to
-#define wifi_ssid "ESL_Lab1"
-#define wifi_password "wifi@esl"
 
 // Uncomment whatever type you're using!
 #define DHTTYPE DHT11   // DHT 11
 //#define DHTTYPE DHT22   // DHT 22  (AM2302)
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)
 
+#define wifi_ssid "ECC_IoTWorkshop"
+#define wifi_password "iotworkshop@ecc"
+
 // Config MQTT Server
 #define mqtt_server "m13.cloudmqtt.com"
-#define mqtt_port 13437
-#define mqtt_user "esp8266-1"
-#define mqtt_password "12345678"
+#define mqtt_port 11419
+#define mqtt_user "esp8266_1"
+#define mqtt_password "asdf1234"
 
 int esp_id = 1;
 

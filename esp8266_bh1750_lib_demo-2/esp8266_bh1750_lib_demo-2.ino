@@ -39,16 +39,16 @@ inline void i2c_write_byte( uint8_t i2c_addr, uint8_t data ) {
   Wire.endTransmission();
 }
 
-#define wifi_ssid "ESL_Lab1"
-#define wifi_password "wifi@esl"
+#define wifi_ssid "ECC_IoTWorkshop"
+#define wifi_password "iotworkshop@ecc"
 
 // Config MQTT Server
-#define mqtt_server "m13.cloudmqtt.com"
-#define mqtt_port 13437
-#define mqtt_user "esp8266-1"
-#define mqtt_password "12345678"
+#define mqtt_server "m12.cloudmqtt.com"
+#define mqtt_port 11419
+#define mqtt_user "esp8266_2"
+#define mqtt_password "asdf1234"
 
-int esp_id = 1;
+int esp_id = 2;
 
 void callback(char* topic, byte* payload, unsigned int length) {
   // handle message arrived

@@ -28,6 +28,8 @@ const uint32_t sound_speed  = 34300;      // centimeters/second
 
 void setup() {
   Serial.begin(115200);
+  pinMode( ECHO_PIN,  INPUT  ); 
+  pinMode( TRIG_PIN,  OUTPUT );
   setup_wifi();
   client.setServer(mqtt_server, mqtt_port);
 }
