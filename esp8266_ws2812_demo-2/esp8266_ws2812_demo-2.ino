@@ -5,12 +5,20 @@
 #define wifi_ssid "ECC_IoTWorkshop"
 #define wifi_password "iotworkshop@ecc"
 
+///////////////////////////// List MQTT Server and MQTT port ///////////////////////////////////////
+//              | NUM 1-5           | NUM 6-10          | NUM 11-15         | NUM 16-20         | //
+//  mqtt_server | m12.cloudmqtt.com | m11.cloudmqtt.com | m13.cloudmqtt.com | m12.cloudmqtt.com | //
+//  mqtt_port   | 11419             | 19226             | 14939             | 14072             | //
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // Config MQTT Server
 #define mqtt_server "m12.cloudmqtt.com"
 #define mqtt_port 11419
 #define mqtt_user "esp8266_X"
 #define mqtt_password "asdf1234"
 int esp_id = X;
+
+// free board url : http://192.168.10.164/IoTWorkshop_Freeboard 
 
 WiFiClient espClient;
 PubSubClient client(espClient);
