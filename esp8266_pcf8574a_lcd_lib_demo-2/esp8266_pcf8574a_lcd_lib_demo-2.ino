@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////////////////
 
 #include <ESP8266WiFi.h>
-
+#include "PubSubClient.h"
 #include <Wire.h> // use the Wire library
 #include "LiquidCrystal_I2C.h" // -> https://github.com/fdebrabander/Arduino-LiquidCrystal-I2C-library
 
@@ -22,8 +22,6 @@ char sbuf[64];   // used for sprintf()
 uint32_t ts;     // used to save timestamp value
 
 #define INTERVAL_MSEC  (1000)
-
-#include "PubSubClient.h"
 
 #define wifi_ssid "ECC_IoTWorkshop"
 #define wifi_password "iotworkshop@ecc"
