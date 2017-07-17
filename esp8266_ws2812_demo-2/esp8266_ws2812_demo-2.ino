@@ -1,21 +1,16 @@
 #include <ESP8266WiFi.h>
 #include "PubSubClient.h"
 #include "Adafruit_NeoPixel.h"
-#ifdef __AVR__
-  #include <avr/power.h>
-#endif
 
-// Update these with values suitable for your network.
-const char* ssid = "ESL_Lab1";
-const char* password = "wifi@esl";
+#define wifi_ssid "ECC_IoTWorkshop"
+#define wifi_password "iotworkshop@ecc"
 
 // Config MQTT Server
 #define mqtt_server "m12.cloudmqtt.com"
 #define mqtt_port 11419
-#define mqtt_user "esp8266_2"
+#define mqtt_user "esp8266_X"
 #define mqtt_password "asdf1234"
-
-int esp_id = 2;
+int esp_id = X;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
