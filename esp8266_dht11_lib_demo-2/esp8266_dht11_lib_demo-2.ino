@@ -9,6 +9,9 @@
 //#define DHTTYPE DHT22   // DHT 22  (AM2302)
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)
 
+DHT dht(DHTPIN, DHTTYPE);
+
+
 #define wifi_ssid "ECC_IoTWorkshop"
 #define wifi_password "iotworkshop@ecc"
 
@@ -27,13 +30,14 @@ int esp_id = X;
 
 // free board url : http://192.168.10.164/IoTWorkshop_Freeboard 
 
+WiFiClient espClient;
+PubSubClient client(espClient);
+char temperature_topic[64];
+char humidity_topic[64];
+
 void callback(char* topic, byte* payload, unsigned int length) {
   // handle message arrived
 }
-
-WiFiClient espClient;
-PubSubClient client(espClient);
-DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
   Serial.begin(115200);
@@ -41,6 +45,8 @@ void setup() {
   setup_wifi();
   client.setServer(mqtt_server, mqtt_port);
   dht.begin();
+  sprintf(temperature_topic, "/esp8266/%d/temperature", esp_id);
+  sprintf(humidity_topic, "/esp8266/%d/humidity", esp_id);
 }
 
 void setup_wifi() {
@@ -102,12 +108,7 @@ void loop() {
   long now = millis();
   if (now - lastMsg > 5000) {
     lastMsg = now;
-    char temperature_topic[64];
-    sprintf(temperature_topic, "/esp8266/%d/temperature", esp_id);
-    Serial.println(temperature_topic);
-    char humidity_topic[64];
-    sprintf(humidity_topic, "/esp8266/%d/humidity", esp_id);
-    Serial.println(humidity_topic);
+    
   // Reading temperature or humidity takes about 250 milliseconds!
   // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
     float newHum = dht.readHumidity();

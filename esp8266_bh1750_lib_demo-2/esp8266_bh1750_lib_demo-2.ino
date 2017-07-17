@@ -3,8 +3,8 @@
 #include <ESP8266WiFi.h>
 #include "PubSubClient.h"
 
-#define I2C_SCL_PIN       (4)       // D2 pin (SCL / GPIO-4)
-#define I2C_SDA_PIN       (0)       // D3 pin (SDA / GPIO-0)
+#define I2C_SCL_PIN       (D1)    // D1 pin (GPIO-5
+#define I2C_SDA_PIN       (D2)    // D2 pin (GPIO-4
 #define I2C_BH1750_ADDR       (0x23)
 
 BH1750 bh( I2C_BH1750_ADDR );

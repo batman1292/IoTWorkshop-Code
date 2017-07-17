@@ -18,6 +18,8 @@
 const uint32_t timeout_usec = 40000;     // timeout in microseconds
 const uint32_t sound_speed  = 34300;     // in centimeters/second
 
+String str;
+
 void setup() {
    Serial.begin( 115200 );
    Serial.println( F("\n\n\n") );
@@ -26,8 +28,6 @@ void setup() {
    pinMode( ECHO_PIN, INPUT  );
    pinMode( TRIG_PIN, OUTPUT );
 }
-
-String str;
 
 void loop() {
    // send a PING signal (a short-pulse signal on TRIG pin)
